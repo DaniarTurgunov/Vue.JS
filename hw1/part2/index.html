@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="reverseBtnText">{{ btnText }}</button>
+    </div>
+    <div id="app2">
+        <h3>Список элементов</h3>
+        <button @click="addElement">
+            Добавить
+        </button>
+        <p v-for="(item, index) in array" :key="index" @click="removeItem(index)">{{ item }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                btnText: "Перевернуть"
+            },
+            methods: {
+                reverseBtnText() {
+                    let textArray = this.btnText.split("");
+                    let reverseArray = textArray.reverse();
+                    this.btnText = reverseArray.join("");
+                }
+            }
+        })
+        new Vue({
+            el: '#app2',
+            data: {
+                array: ['el1', 'el2', 'el3', 'el4',]
+            },
+            methods: {
+                addElement() {
+                    this.array.push('newEl');
+                },
+                removeItem(index) {
+                    this.array.splice(index, 1);
+                }  
+            }
+        })
+    </script>
+</body>
+</html>
